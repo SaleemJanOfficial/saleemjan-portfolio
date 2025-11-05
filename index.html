@@ -4,159 +4,758 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Saleem Jan — .NET Developer</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0b0f14; --card:#0f1720; --muted:#98a0aa; --accent:#2dd4bf; --accent-2:#2563eb;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    html,body{height:100%;background:linear-gradient(180deg,#020407 0%, #071018 100%);font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;margin:0;color:#e6eef6}
-    .container{padding:48px 18px}
-    .hero{display:flex;gap:24px;align-items:center}
-    .avatar{width:128px;height:128px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#031024;font-size:36px}
-    h1{margin:0;font-weight:700}
-    .lead{color:var(--muted)}
-    .card-dark{background:linear-gradient(180deg,var(--card),#0b1218);border:1px solid rgba(255,255,255,0.03);border-radius:12px;padding:18px}
-    .skill-badge{background:rgba(255,255,255,0.04);padding:6px 10px;border-radius:999px;margin:4px;color:var(--muted);font-size:13px}
-    .project-card{border-radius:10px;padding:16px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
-    .muted{color:var(--muted)}
-    .section-title{color:#bcd6ff;font-weight:600;margin-bottom:12px}
-    .badge-wid{padding:6px 10px;border-radius:999px;background:#1f2937;color:#cfeafe;font-weight:600}
-    .row-gap{gap:18px}
-    a.btn-accent{background:var(--accent);border:none;color:#021018}
-    footer{color:var(--muted);margin-top:32px;text-align:center}
-    @media (max-width:767px){.hero{flex-direction:column;align-items:flex-start}.avatar{width:96px;height:96px;font-size:28px}}
+
+    :root {
+      --bg-dark: #0a0e14;
+      --bg-darker: #050709;
+      --bg-card: #111827;
+      --bg-hover: #1a202c;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --accent-teal: #14b8a6;
+      --accent-blue: #3b82f6;
+      --accent-purple: #8b5cf6;
+      --border-color: rgba(255,255,255,0.05);
+    }
+
+    html, body {
+      height: 100%;
+      background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* Smooth scrolling */
+    html { scroll-behavior: smooth; }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(10, 14, 20, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 20px 0;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    nav a {
+      margin-left: 32px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--accent-teal);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-text .title {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: clamp(24px, 4vw, 40px);
+    }
+
+    .hero-text p {
+      color: var(--text-secondary);
+      font-size: 16px;
+      margin-bottom: 30px;
+      max-width: 500px;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(20, 184, 166, 0.3);
+    }
+
+    .btn-secondary {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card);
+      border-color: var(--accent-teal);
+    }
+
+    .hero-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .info-item {
+      animation: fadeInUp 0.8s ease 0.2s both;
+    }
+
+    .info-label {
+      color: var(--text-muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .info-value {
+      color: var(--text-primary);
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeInUp 0.8s ease 0.4s both;
+    }
+
+    .avatar-circle {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.2), rgba(59, 130, 246, 0.2));
+      border: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      font-weight: 700;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .avatar-circle::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%); }
+      100% { transform: translateX(100%) translateY(100%); }
+    }
+
+    .avatar-circle div {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Skills Section */
+    .section {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 60px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-teal), var(--accent-blue));
+      border-radius: 2px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-tag {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 12px 16px;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: default;
+      text-align: center;
+    }
+
+    .skill-tag:hover {
+      background: var(--bg-hover);
+      border-color: var(--accent-teal);
+      color: var(--accent-teal);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(20, 184, 166, 0.2);
+    }
+
+    /* Cards */
+    .card {
+      background: linear-gradient(135deg, var(--bg-card), rgba(255,255,255,0.02));
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 32px;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    .card:hover {
+      background: linear-gradient(135deg, var(--bg-hover), rgba(255,255,255,0.05));
+      border-color: var(--accent-teal);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(20, 184, 166, 0.15);
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    .card .meta {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .card li {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .card li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent-teal);
+    }
+
+    /* Two Column Layout */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 40px;
+    }
+
+    .card-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    /* Experience & Projects */
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .timeline {
+      border-left: 2px solid var(--border-color);
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .timeline .card {
+      background: transparent;
+      border: none;
+      padding: 24px 0;
+    }
+
+    .timeline .card::before {
+      content: '';
+      position: absolute;
+      left: -9px;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px var(--bg-dark);
+    }
+
+    .timeline .card:hover {
+      transform: none;
+      background: transparent;
+      border: none;
+    }
+
+    /* Tags */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      background: rgba(20, 184, 166, 0.1);
+      color: var(--accent-teal);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.05), rgba(59, 130, 246, 0.05));
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 60px;
+      text-align: center;
+    }
+
+    .contact-section h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .contact-section p {
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .contact-links a:hover {
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+      color: white;
+      border-color: transparent;
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-info {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .contact-section {
+        padding: 40px 20px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="row row-gap">
-      <div class="col-12 card-dark">
-        <div class="hero">
-          <div class="avatar">SJ</div>
-          <div style="flex:1">
-            <h1>Saleem Jan</h1>
-            <div class="lead">Passionate .NET Developer — Building Web, Desktop & Cross-Platform Apps with WPF, ASP.NET, Blazor, React & .NET MAUI</div>
-            <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-              <a class="btn btn-sm btn-accent" id="downloadCv">Download CV</a>
-              <a class="btn btn-sm btn-outline-light" href="#contact">Contact</a>
-              <span class="muted">📍 Swabi, KPK, Pakistan</span>
+  <!-- Header Navigation -->
+  <header>
+    <div class="header-content">
+      <div class="logo">SJ</div>
+      <nav>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <div>
+          <h1>
+            <span class="title">.NET Developer</span><br>
+            Building Web & Desktop Applications
+          </h1>
+          <p>
+            Passionate developer crafting robust, scalable applications with C#, ASP.NET, Blazor, and modern web technologies. Currently advancing professional expertise as a Junior .NET Developer.
+          </p>
+
+          <div class="hero-cta">
+            <button class="btn btn-primary" id="downloadCv">Download CV</button>
+            <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+          </div>
+
+          <div class="hero-info">
+            <div class="info-item">
+              <div class="info-label">Location</div>
+              <div class="info-value">📍 Swabi, KPK, Pakistan</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Status</div>
+              <div class="info-value">🚀 Open to Opportunities</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Email</div>
+              <div class="info-value">Saleemjan3344@gmail.com</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Phone</div>
+              <div class="info-value">+92-310-8291930</div>
             </div>
           </div>
-          <div style="text-align:right">
-            <div class="muted">Mobile</div>
-            <div style="font-weight:700">+92-310-8291930</div>
-            <div class="muted" style="margin-top:8px">Email</div>
-            <div>Saleemjan3344@gmail.com</div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="avatar-circle">
+            <div>SJ</div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="col-md-4 col-12 card-dark">
-        <div class="section-title">Skills</div>
-        <div style="display:flex;flex-wrap:wrap">
-          <span class="skill-badge">C#</span>
-          <span class="skill-badge">WPF</span>
-          <span class="skill-badge">WinForms</span>
-          <span class="skill-badge">ASP.NET MVC</span>
-          <span class="skill-badge">Blazor</span>
-          <span class="skill-badge">React</span>
-          <span class="skill-badge">.NET MAUI</span>
-          <span class="skill-badge">SQL Server</span>
-          <span class="skill-badge">Entity Framework</span>
-          <span class="skill-badge">LINQ</span>
-          <span class="skill-badge">Git</span>
-        </div>
-
-        <hr style="border-color:rgba(255,255,255,0.03)">
-        <div class="section-title">Tools & Other</div>
-        <ul class="muted" style="padding-left:18px">
-          <li>Visual Studio 2022</li>
-          <li>SSMS, SQLite</li>
-          <li>Bootstrap, HTML/CSS/JS</li>
-          <li>MS Office (Excel, Word)</li>
-        </ul>
-
-        <hr style="border-color:rgba(255,255,255,0.03)">
-        <div class="section-title">Education</div>
-        <div class="muted">BS Computer Science — University of Swabi (2024) — CGPA: 3.12/4.00</div>
-        <div class="muted" style="margin-top:8px">DAE, DIT — KPBTE (2019)</div>
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+      <h2 class="section-title">Skills & Expertise</h2>
+      <div class="skills-grid">
+        <div class="skill-tag">C#</div>
+        <div class="skill-tag">WPF</div>
+        <div class="skill-tag">ASP.NET MVC</div>
+        <div class="skill-tag">Blazor</div>
+        <div class="skill-tag">React</div>
+        <div class="skill-tag">.NET MAUI</div>
+        <div class="skill-tag">SQL Server</div>
+        <div class="skill-tag">Entity Framework</div>
+        <div class="skill-tag">LINQ</div>
+        <div class="skill-tag">Git</div>
+        <div class="skill-tag">HTML/CSS/JS</div>
+        <div class="skill-tag">Bootstrap</div>
       </div>
+    </section>
 
-      <div class="col-md-8 col-12 card-dark">
-        <div class="section-title">About & Objective</div>
-        <p class="muted">Seeking a challenging opportunity to demonstrate my skills and abilities and attain experience and knowledge in an organization working on a global scale offering scope for career growth and professional development. To continue to learn and develop my organizational skill within an organization that provide challenge at a respective level and opportunities to progress through hard work and convert my theoretical knowledge into practical.</p>
-
-        <div class="section-title">Experience</div>
-        <div class="muted"><strong>Junior .NET Developer</strong> — January 15, 2024 – Present</div>
-        <ul class="muted" style="margin-top:8px">
-          <li>Working on desktop and web applications using C#.NET and SQL Server</li>
-          <li>Collaborating with senior developers for code reviews and project planning</li>
-          <li>Maintaining and updating existing software tools and databases</li>
-        </ul>
-
-        <div class="section-title" style="margin-top:14px">Projects</div>
-        <div class="project-card">
-          <h5>Library Management System (Final Year Project)</h5>
-          <p class="muted">Windows Forms application using C#.NET and SQL Server. Features: login, book search, late fee calculation, role-based access (admin/librarian), reporting, validation and testing.</p>
+    <!-- About & Experience -->
+    <section class="section" id="experience">
+      <h2 class="section-title">Experience</h2>
+      <div class="grid-2">
+        <div class="card-list">
+          <div class="card">
+            <div class="info-label">Education</div>
+            <h3>BS Computer Science</h3>
+            <p class="meta">University of Swabi (2024)</p>
+            <p>CGPA: 3.12/4.00</p>
+          </div>
+          <div class="card">
+            <div class="info-label">Technical Background</div>
+            <h3>DAE & DIT</h3>
+            <p class="meta">KPBTE (2019)</p>
+            <p>Diploma in Information Technology</p>
+          </div>
         </div>
 
-        <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
-          <div class="project-card" style="flex:1">
-            <h6>Additional Projects & Tasks</h6>
-            <ul class="muted">
-              <li>POS utilities, barcode printing, reporting tasks</li>
-              <li>Data migrations and SQL scripts</li>
+        <div class="timeline">
+          <div class="card">
+            <div class="info-label">Present Role</div>
+            <h3>Junior .NET Developer</h3>
+            <p class="meta">January 2024 – Present</p>
+            <ul>
+              <li>Developing desktop and web applications using C#.NET and SQL Server</li>
+              <li>Collaborating with senior developers for code reviews and project planning</li>
+              <li>Maintaining and updating existing software tools and databases</li>
+              <li>Implementing features and fixing bugs in production applications</li>
             </ul>
           </div>
-          <div class="project-card" style="width:220px">
-            <h6>Hobbies</h6>
-            <div class="muted">Book reading, playing activities, programming</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+      <h2 class="section-title">Key Projects</h2>
+      <div class="experience-grid">
+        <div class="card">
+          <h3>Library Management System</h3>
+          <p class="meta">Final Year Project — 2024</p>
+          <p>
+            Comprehensive Windows Forms application built with C#.NET and SQL Server. Features include user authentication, advanced book search functionality, late fee calculations, role-based access control for administrators and librarians, comprehensive reporting, and robust data validation.
+          </p>
+          <div class="tags">
+            <span class="tag">C#</span>
+            <span class="tag">Windows Forms</span>
+            <span class="tag">SQL Server</span>
+            <span class="tag">Entity Framework</span>
           </div>
         </div>
 
-        <div class="section-title" style="margin-top:14px">Education & Scores</div>
-        <div class="muted">Matric (2016) — Board of Intermediate & Secondary Education Mardan — 747/1100</div>
-        <div class="muted">DAE (2019) — KPBTE — 2634/3550</div>
-        <div class="muted">DIT (2019) — KPBTE — 1173/1400</div>
-      </div>
-
-      <div class="col-12 card-dark" id="contact">
-        <div class="section-title">Contact</div>
-        <div class="row">
-          <div class="col-md-6 col-12">
-            <p class="muted"><strong>Email:</strong> <a href="mailto:Saleemjan3344@gmail.com">Saleemjan3344@gmail.com</a></p>
-            <p class="muted"><strong>Phone:</strong> +92-310-8291930</p>
-            <p class="muted"><strong>Address:</strong> Village Firdous Abad, P/o. Charbagh, Tehsil Razzar, District Swabi, KPK, Pakistan.</p>
+        <div class="card">
+          <h3>POS & Business Solutions</h3>
+          <p class="meta">Professional Experience</p>
+          <p>
+            Developed point-of-sale utilities and business management tools. Implemented barcode generation and printing systems, created custom reporting solutions, and handled critical data migrations with SQL scripts ensuring data integrity.
+          </p>
+          <div class="tags">
+            <span class="tag">POS Systems</span>
+            <span class="tag">Data Migration</span>
+            <span class="tag">SQL Scripts</span>
+            <span class="tag">Reporting</span>
           </div>
-          <div class="col-md-6 col-12">
-            <!-- <p class="muted"><strong>NIC:</strong> 16204-0417433-9</p> -->
-            <p class="muted"><strong>DOB:</strong> 18-03-2000</p>
-            <div style="margin-top:12px">
-              <a class="btn btn-sm btn-outline-light" href="#">GitHub</a>
-              <a class="btn btn-sm btn-outline-light" href="#">LinkedIn</a>
-            </div>
+        </div>
+
+        <div class="card">
+          <h3>Web & Desktop Apps</h3>
+          <p class="meta">Ongoing Development</p>
+          <p>
+            Exploring modern technologies including ASP.NET MVC for web applications, Blazor for interactive web UIs, and WPF for desktop applications. Committed to learning MAUI for cross-platform mobile development.
+          </p>
+          <div class="tags">
+            <span class="tag">ASP.NET MVC</span>
+            <span class="tag">Blazor</span>
+            <span class="tag">WPF</span>
+            <span class="tag">.NET MAUI</span>
           </div>
         </div>
       </div>
+    </section>
 
-      <footer>
-        <div>Made with ❤️ by Saleem Jan — <span class="muted">.NET & WPF Developer</span></div>
-      </footer>
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+      <div class="contact-section">
+        <h2>Let's Work Together</h2>
+        <p>
+          I'm always interested in hearing about new projects and opportunities. Feel free to reach out if you'd like to collaborate or just chat about .NET development.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:Saleemjan3344@gmail.com">📧 Email Me</a>
+          <a href="tel:+923108291930">📱 Call Me</a>
+          <a href="https://github.com" target="_blank" rel="noopener">🐙 GitHub</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener">💼 LinkedIn</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    </div>
-  </div>
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Saleem Jan. All rights reserved. Made with ❤️ for GitHub Pages.</p>
+  </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Generate a downloadable CV (plain text) from the page data
+    // Download CV
     document.getElementById('downloadCv').addEventListener('click', function(){
-      const cvText = `SALEEM JAN\nMobile: +92-3108291930\nEmail: Saleemjan3344@gmail.com\n\nOBJECTIVE:\n${document.querySelector('.lead').innerText}\n\nEXPERIENCE:\nJunior .NET Developer — January 15, 2024 – Present\n\nPROJECTS:\nLibrary Management System — Windows Forms (C#.NET, SQL Server)\n\nEDUCATION:\nBS CS — University of Swabi (2024) — CGPA: 3.12/4.00\nDAE / DIT — KPBTE (2019)\n\nADDRESS:\nVillage Firdous Abad, P/o. Charbagh, Tehsil Razzar, District Swabi, KPK, Pakistan.`;
+      const cvText = `SALEEM JAN
+Phone: +92-310-8291930
+Email: Saleemjan3344@gmail.com
+Location: Swabi, KPK, Pakistan
+DOB: 18-03-2000
+
+OBJECTIVE:
+Seeking a challenging opportunity to demonstrate my skills and abilities in an organization working on a global scale, offering scope for career growth and professional development.
+
+EXPERIENCE:
+Junior .NET Developer — January 2024 – Present
+• Developing desktop and web applications using C#.NET and SQL Server
+• Collaborating with senior developers for code reviews and project planning
+• Maintaining and updating existing software tools and databases
+
+EDUCATION:
+BS Computer Science — University of Swabi (2024) — CGPA: 3.12/4.00
+DAE, DIT — KPBTE (2019)
+
+SKILLS:
+C#, WPF, ASP.NET MVC, Blazor, React, .NET MAUI, SQL Server, Entity Framework, LINQ, Git, HTML/CSS/JavaScript, Bootstrap
+
+PROJECTS:
+Library Management System — Windows Forms application with C#.NET and SQL Server
+POS Utilities & Business Solutions — Data migration and reporting systems
+
+CONTACT:
+Email: Saleemjan3344@gmail.com
+Phone: +92-310-8291930
+Address: Village Firdous Abad, P/o. Charbagh, Tehsil Razzar, District Swabi, KPK, Pakistan`;
       const blob = new Blob([cvText], { type: 'text/plain' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = url; a.download = 'SaleemJan_CV.txt';
-      document.body.appendChild(a); a.click(); a.remove();
+      a.href = url;
+      a.download = 'SaleemJan_CV.txt';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
       URL.revokeObjectURL(url);
     });
   </script>
